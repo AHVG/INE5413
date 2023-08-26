@@ -13,13 +13,13 @@ class Grafo:
         return sum([sum([1 for v in linha[i:] if v != float("Inf")]) for i, linha in enumerate(self.__matriz_de_adjacencia)])
 
     def grau(self, v):
-        pass
+        return sum(filter(lambda x: x != float("Inf"), self.__matriz_de_adjacencia[v]))
 
-    def rotulo(self, v):
+    def rotulo(self, v): # Não sei que porra é esta
         pass
 
     def vizinhos(self, v):
-        pass
+        return [i for i, x in enumerate(self.__matriz_de_adjacencia[v]) if x != float("Inf")]
 
     def haAresta(self, u, v):
         pass
@@ -41,3 +41,7 @@ g = Grafo([
 
 print(g)
 print(g.qtdArestas())
+print(g.grau(1))
+print(g.vizinhos(0))
+print(g.vizinhos(1))
+print(g.vizinhos(2))
