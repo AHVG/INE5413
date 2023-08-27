@@ -10,13 +10,14 @@ class BuscadorEmLargura:
         while len(vertices_a_serem_visitados_por_nivel):
             vertices = vertices_a_serem_visitados_por_nivel[:]
             vizinhos_por_nivel = []
+
             for v in vertices:
-                vizinhos_por_nivel.extend(grafo.vizinhos(v))
+                novos_vertices = list(filter(lambda x: x not in vertices_visitados, grafo.vizinhos(v)))
+                vertices_visitados.extend(novos_vertices)
+                vizinhos_por_nivel.extend(novos_vertices)
 
-            vertices_a_serem_adicionados = [x for x in vizinhos_por_nivel if x not in vertices_visitados]
-
-            vertices_visitados.extend(vertices_a_serem_adicionados[:])
-            vertices_a_serem_visitados_por_nivel = vertices_a_serem_adicionados[:]
+            vertices_visitados.extend(vizinhos_por_nivel[:])
+            vertices_a_serem_visitados_por_nivel = vizinhos_por_nivel[:]
             niveis.append(vertices[:])
             nivel += 1
         return niveis
