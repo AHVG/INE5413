@@ -28,6 +28,9 @@ class Grafo:
 
     def peso(self, u, v):
         return self.__matriz_de_adjacencia[u - 1][v - 1]
+    
+    def removerAresta(self, u, v):
+        self.__matriz_de_adjacencia[u - 1][v - 1] = self.sem_aresta
 
     def ler(self, arquivo):
         # TODO: É possível fazer bem melhor que isso
