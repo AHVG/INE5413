@@ -49,7 +49,7 @@ class Grafo:
             u = int(u) - 1
             v = int(v) - 1
             self.__matriz_de_adjacencia[v][u] = p
-            self.__matriz_de_adjacencia[u][v] = p
+            # self.__matriz_de_adjacencia[u][v] = p
 
     def __str__(self):
         return str(self.__matriz_de_adjacencia)
