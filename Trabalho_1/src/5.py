@@ -11,6 +11,6 @@ def main():
     grafo.ler(args.file)
     distanciasMinimas = FloydWarshall().calcular(grafo)
     for linha in distanciasMinimas:
-        print(linha)
+        print(" ".join(linha))
 
 main()
