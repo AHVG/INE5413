@@ -52,7 +52,7 @@ class Grafo:
             v = int(v) - 1
             if not self.ehPonderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
-            if not self.ehDirigido: self.__matriz_de_adjacencia[u][v] = p
+            if not self.ehDirigido: self.__matriz_de_adjacencia[v][u] = p
 
     def __str__(self):
         return str(self.__matriz_de_adjacencia)
