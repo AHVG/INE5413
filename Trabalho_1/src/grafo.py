@@ -50,7 +50,8 @@ class Grafo:
         for u, v, p in map(lambda x: map(float, x.split()), vertices):
             u = int(u) - 1
             v = int(v) - 1
-            self.__matriz_de_adjacencia[u][v] = p if self.ehPonderado else 1
+            if not self.ehPonderado: p = 1
+            self.__matriz_de_adjacencia[u][v] = p
             if not self.ehDirigido: self.__matriz_de_adjacencia[u][v] = p
 
     def __str__(self):
