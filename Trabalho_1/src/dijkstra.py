@@ -62,8 +62,6 @@ class Dijkstra:
                         self.__vertices[v-1].distancia = self.__vertices[minVertice-1].distancia + grafo.peso(minVertice, v)
                         self.__vertices[v-1].antecessor = self.__vertices[minVertice-1]
 
-        # da pra fazer esse print na própria main, mas preferi por colocar aqui na classe
-        self.print()
         return self.__vertices
 
     # método que vai retornar a lista de antecessores de cada vértice, ou seja
@@ -78,10 +76,3 @@ class Dijkstra:
                 no = no.antecessor
 
         return lista_antecessores[::-1]
-    
-    # método que vai printar o resultado
-    def print(self):
-        for no in self.__vertices:
-            lista_antecessores = self.getAntecessores(no)
-            lista_antecessores_com_virgulha = ",".join(str(x) for x in lista_antecessores)
-            print(f"{no.vertice}: {lista_antecessores_com_virgulha}; d={no.distancia}")
