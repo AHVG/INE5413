@@ -8,7 +8,7 @@ def main():
     parser.add_argument('-v', '--vertice', action='store', type=int, required=True, help="Vertice que será analisado")
     args = parser.parse_args()
 
-    grafo = Grafo()
+    grafo = Grafo(True, True)
     grafo.ler(args.file)
     inicio = args.vertice
     niveis = CicloEuleriano().EulerianTour(grafo, inicio)

@@ -4,7 +4,9 @@ class Grafo:
 
     sem_aresta = float("Inf") # Pode ser qualquer outro valor mágico, mas foi escolhido infinito pq é o mais descritivo
 
-    def __init__(self):
+    def __init__(self, _ehDirigido: bool, _ehPonderado: bool):
+        self.ehDirigido = _ehDirigido
+        self.ehPonderado = _ehPonderado
         self.__rotulos = [] # Não sei para que serve esses rotulos: para nada
         self.__matriz_de_adjacencia = []
 
@@ -45,11 +47,12 @@ class Grafo:
         
         vertices = linhas[inicio_leitura_de_edges:]
         self.__matriz_de_adjacencia = [[self.sem_aresta] * numero_de_vertices for _ in range(numero_de_vertices)]
-        for v, u, p in map(lambda x: map(float, x.split()), vertices):
+        for u, v, p in map(lambda x: map(float, x.split()), vertices):
             u = int(u) - 1
             v = int(v) - 1
-            self.__matriz_de_adjacencia[v][u] = p
+            if not self.ehPonderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
+            if not self.ehDirigido: self.__matriz_de_adjacencia[v][u] = p
 
     def __str__(self):
         return str(self.__matriz_de_adjacencia)
