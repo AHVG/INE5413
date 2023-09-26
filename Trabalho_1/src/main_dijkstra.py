@@ -14,6 +14,6 @@ def main():
     niveis = Dijkstra().busca(grafo, inicio)
     for no in niveis:
         lista_antecessores = Dijkstra().getAntecessores(no)
-        lista_antecessores_com_virgulha = ",".join(str(x) for x in lista_antecessores)
-        print(f"{no.vertice}: {lista_antecessores_com_virgulha}; d={int(no.distancia)}")
+        lista_antecessores_com_virgula = ",".join(str(x) for x in lista_antecessores)
+        print(f"{no.vertice}: {lista_antecessores_com_virgula}; d={int(no.distancia)}")
 main()
