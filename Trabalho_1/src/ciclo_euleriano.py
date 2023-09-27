@@ -18,9 +18,12 @@ class CicloEuleriano:
     def buscarSubcicloEuleriano(self, grafo: Grafo, v: int) -> list:
         ciclo = [v]
         t = v
-        while v == t:
+        while v is t:
             tinha_nao_visitada = False
             for u in grafo.vizinhos(v):
+                print(v)
+                print(grafo.vizinhos(v))
+                print(u)
                 if grafo.haAresta(u,v) and self.__c[u-1][v-1] == False:
                     self.__c[u-1][v-1] = True
                     v = u
@@ -31,6 +34,9 @@ class CicloEuleriano:
         
         for x in ciclo:
             for w in grafo.vizinhos(x):
+                print(x)
+                print(grafo.vizinhos(x))
+                print(w)
                 if grafo.haAresta(x,w):
                     visitada = self.__c[x-1][w-1]
                 if not visitada:
@@ -42,9 +48,8 @@ class CicloEuleriano:
         return True, ciclo
     
     def hierholzer(self, grafo):
-        copia_matriz = copy.deepcopy(grafo.getMatriz())
-        self.setar_matriz_c(copia_matriz)
-        v = 2
+        self.setar_matriz_c(grafo.getMatriz())
+        v = 1
         r, ciclo = self.buscarSubcicloEuleriano(grafo, v)
         if not r:
             return False, None

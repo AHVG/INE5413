@@ -1,4 +1,4 @@
-
+import copy
 
 class Grafo:
 
@@ -11,7 +11,7 @@ class Grafo:
         self.__matriz_de_adjacencia = []
     
     def getMatriz(self):
-        return self.__matriz_de_adjacencia[:]
+        return copy.deepcopy(self.__matriz_de_adjacencia)
 
     def qtdVertices(self):
         return len(self.__matriz_de_adjacencia)

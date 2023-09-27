@@ -7,7 +7,7 @@ def main():
     parser.add_argument('-f', '--file', action='store', type=str, required=True, help="Path do arquivo que tem o grafo")
     args = parser.parse_args()
 
-    grafo = Grafo(True, True)
+    grafo = Grafo(False, True)
     grafo.ler(args.file)
     tem, ciclo = CicloEuleriano().hierholzer(grafo)
     print(1 if tem else 0)
