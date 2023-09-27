@@ -54,5 +54,13 @@ class Grafo:
             self.__matriz_de_adjacencia[u][v] = p
             if not self.ehDirigido: self.__matriz_de_adjacencia[v][u] = p
 
+    def obter_vizinhos(self):
+        vizinhos = []
+        for l, linha in enumerate(self.__matriz_de_adjacencia):
+            for c, elemento in enumerate(linha):
+                if self.haAresta(l + 1, c + 1):
+                    vizinhos.append((l + 1, c + 1))
+        return vizinhos[:]
+
     def __str__(self):
         return str(self.__matriz_de_adjacencia)
