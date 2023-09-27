@@ -1,16 +1,5 @@
 from grafo import Grafo
 class CicloEuleriano:
-    sem_aresta = float('inf')
-
-    def __init__(self) -> None:
-        self.__c = None
-    
-    def setar_matriz_c(self, matriz) -> None:
-        self.__c = matriz
-        for u in range(len(self.__c)):
-            for v in range(len(self.__c)):
-                if self.__c[u][v] != self.sem_aresta:
-                    self.__c[u][v] = False
     
     def buscarSubcicloEuleriano(self, grafo: Grafo, v: int) -> list:
         ciclo = [v]
@@ -45,7 +34,10 @@ class CicloEuleriano:
         return True, ciclo
     
     def hierholzer(self, grafo, v):
-        self.setar_matriz_c(grafo.getMatriz()) # para cada e pertencente a E Ce = false (cria uma nova matriz booleana) 
+        arestas = grafo.obterArestas()
+        print(arestas)
+
+        return True, ()
         #tem que fazer pra selecionar um  v arbitrario
         r, ciclo = self.buscarSubcicloEuleriano(grafo, v)
         if not r: #se r = false
