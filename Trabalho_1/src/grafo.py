@@ -7,8 +7,11 @@ class Grafo:
     def __init__(self, _ehDirigido: bool, _ehPonderado: bool):
         self.ehDirigido = _ehDirigido
         self.ehPonderado = _ehPonderado
-        self.__rotulos = [] # Não sei para que serve esses rotulos: para nada
+        self.__rotulos = []
         self.__matriz_de_adjacencia = []
+    
+    def getMatriz(self):
+        return self.__matriz_de_adjacencia[:]
 
     def qtdVertices(self):
         return len(self.__matriz_de_adjacencia)
@@ -19,7 +22,7 @@ class Grafo:
     def grau(self, v):
         return len(self.vizinhos(v))
 
-    def rotulo(self, v): # Não sei que porra é esta
+    def rotulo(self, v):
         return self.__rotulos[v - 1]
 
     def vizinhos(self, v):
@@ -30,9 +33,6 @@ class Grafo:
 
     def peso(self, u, v):
         return self.__matriz_de_adjacencia[u - 1][v - 1]
-    
-    def removerAresta(self, u, v):
-        self.__matriz_de_adjacencia[u - 1][v - 1] = self.sem_aresta
 
     def ler(self, arquivo):
         # TODO: É possível fazer bem melhor que isso

@@ -1,5 +1,3 @@
-from grafo import Grafo
-
 class No:
     def __init__(self, vertice) -> None:
         self.vertice = int(vertice)
