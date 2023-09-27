@@ -1,7 +1,8 @@
 from grafo import Grafo
+import copy
 class CicloEuleriano:
     sem_aresta = float('inf')
-    
+
     def __init__(self) -> None:
         self.__c = None
     
@@ -41,10 +42,8 @@ class CicloEuleriano:
         return True, ciclo
     
     def hierholzer(self, grafo):
-        print(grafo)
-        copia_matriz = grafo.getMatriz()
+        copia_matriz = copy.deepcopy(grafo.getMatriz())
         self.setar_matriz_c(copia_matriz)
-        print(grafo)
         v = 2
         r, ciclo = self.buscarSubcicloEuleriano(grafo, v)
         if not r:
@@ -56,5 +55,3 @@ class CicloEuleriano:
                     return False, None
                 
         return True, ciclo
-        
-                    

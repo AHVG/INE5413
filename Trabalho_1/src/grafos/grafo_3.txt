@@ -1,4 +1,4 @@
-*vertices 2
+*vertices 3
 1 rotulo_de_1
 2 rotulo_de_2
 3 rotulo_de_3
