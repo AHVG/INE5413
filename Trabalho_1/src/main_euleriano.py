@@ -9,11 +9,8 @@ def main():
 
     grafo = Grafo(False, True)
     grafo.ler(args.file)
-    tem, ciclo = CicloEuleriano().hierholzer(grafo)
+    tem, ciclo = CicloEuleriano().hierholzer(grafo, 1)
     print(1 if tem else 0)
     print(ciclo[:-1] if ciclo is not None else "")
-
-
-    
 
 main()
