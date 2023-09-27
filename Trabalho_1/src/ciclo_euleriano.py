@@ -1,5 +1,7 @@
 from grafo import Grafo
 class CicloEuleriano:
+    sem_aresta = float('inf')
+    
     def __init__(self) -> None:
         self.__c = None
     
