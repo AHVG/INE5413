@@ -5,7 +5,7 @@ from buscador_em_largura import BuscadorEmLargura
 
 
 def main():
-    # Paramêtro de programa
+    # Parametro de programa
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', action='store', type=str, required=True, help="Path do arquivo que tem o grafo")
     parser.add_argument('-v', '--vertice', action='store', type=int, required=True, help="Vertice que será analisado")

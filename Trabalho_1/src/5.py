@@ -3,7 +3,7 @@ from floyd_warshall import FloydWarshall
 import argparse
 
 def main():
-    # Paramêtro de programa
+    # Parametro de programa
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', action='store', type=str, required=True, help="Path do arquivo que tem o grafo")
     args = parser.parse_args()
