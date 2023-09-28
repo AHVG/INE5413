@@ -1,4 +1,8 @@
 from grafo import Grafo
+
+import random
+
+
 class CicloEuleriano:
     
     def buscarSubcicloEuleriano(self, grafo: Grafo, v: int) -> list:
@@ -33,13 +37,13 @@ class CicloEuleriano:
 
         return True, ciclo
     
-    def hierholzer(self, grafo, v):
-        arestas = grafo.obterArestas()
-        print(arestas)
-
+    def hierholzer(self, grafo):
+        arestas = grafo.obterArestasSemRepeticao()
+        v = random.randint(1, grafo.qtdVertices())
+        print("Arestas:", arestas)
+        print("Vertice inicial:", v)
         return True, ()
-        #tem que fazer pra selecionar um  v arbitrario
-        r, ciclo = self.buscarSubcicloEuleriano(grafo, v)
+        r, ciclo = self.buscarSubcicloEuleriano(grafo, v, arestas)
         if not r: #se r = false
             return False, None
 

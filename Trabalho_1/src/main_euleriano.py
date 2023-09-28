@@ -9,7 +9,7 @@ def main():
 
     grafo = Grafo(False, True)
     grafo.ler(args.file)
-    tem, ciclo = CicloEuleriano().hierholzer(grafo, 1)
+    tem, ciclo = CicloEuleriano().hierholzer(grafo)
 
 
 

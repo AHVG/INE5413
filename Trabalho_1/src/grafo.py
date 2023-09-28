@@ -10,7 +10,7 @@ class Grafo:
         self.__rotulos = []
         self.__matriz_de_adjacencia = []
     
-    def getMatriz(self):
+    def obterMatriz(self):
         return copy.deepcopy(self.__matriz_de_adjacencia)
 
     def qtdVertices(self):
@@ -61,6 +61,14 @@ class Grafo:
                 if self.haAresta(l + 1, c + 1):
                     vizinhos.append((l + 1, c + 1))
         return vizinhos[:]
+    
+    def obterArestasSemRepeticao(self):
+        arestas = []
+        for l, linha in enumerate(self.__matriz_de_adjacencia):
+            for c, elemento in enumerate(linha):
+                if self.haAresta(l + 1, c + 1) and (c + 1, l + 1) not in arestas:
+                    arestas.append((l + 1, c + 1))
+        return arestas[:]
 
     def __str__(self):
         return str(self.__matriz_de_adjacencia)
