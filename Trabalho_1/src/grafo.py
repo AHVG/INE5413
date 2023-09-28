@@ -2,6 +2,7 @@ import copy
 
 class Grafo:
 
+
     sem_aresta = float("Inf") # Pode ser qualquer outro valor mágico, mas foi escolhido infinito pq é o mais descritivo
 
 
