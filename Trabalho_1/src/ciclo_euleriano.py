@@ -15,8 +15,8 @@ class CicloEuleriano:
             # pega todas arestas que estão ligadas a v
             arestasVizinhasV = list(filter(lambda aresta: aresta[0] == v or aresta[1] == v, arestas))
 
-            # Se não existir nenhuma aresta ligada a v, então não há caminho de volta para t
-            # ou seja, não se tem um ciclo euleriano
+            # se nao existir nenhuma aresta ligada a v, então não ha caminho de volta para t
+            # ou seja, nao se tem um ciclo euleriano
             if not len(arestasVizinhasV):
                 return None
 
@@ -24,10 +24,10 @@ class CicloEuleriano:
             arestaEsolhida = random.choice(arestasVizinhasV)
             arestas.remove(arestaEsolhida)
             
-            # pega o próximo vertice do ciclo
+            # pega o proximo vertice do ciclo
             v = arestaEsolhida[0] if v == arestaEsolhida[1] else arestaEsolhida[1]
             ciclo.append(v)
-            # Se o próximo vertice for o inicial, fechamos um ciclo euleriano
+            # Se o proximo vertice for o inicial, fechamos um ciclo euleriano
             if v == t:
                 break
 
@@ -35,7 +35,7 @@ class CicloEuleriano:
         novoCiclo = ciclo[:]
         for i, verticeCiclo in enumerate(ciclo):
             for origem, _ in arestas:
-                # Se há alguma aresta não visistada ligada ao ciclo, então se faz a busca por um subciclo
+                # Se ha alguma aresta não visistada ligada ao ciclo, entao se faz a busca por um subciclo
                 if origem == verticeCiclo:
                     subCiclo = self.buscarSubcicloEuleriano(grafo, origem, arestas)
                     if not subCiclo:
