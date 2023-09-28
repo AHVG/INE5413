@@ -3,6 +3,7 @@ from grafo import Grafo
 
 class FloydWarshall:
 
+
     def funcao_w(self, grafo: Grafo) -> list[list]:
         D = []
         for u in range(grafo.qtdVertices()):
@@ -16,6 +17,7 @@ class FloydWarshall:
                     linha.append(grafo.sem_aresta)
             D.append(linha)
         return D
+
 
     def calcular(self, grafo: Grafo) -> list[list]:
         D_anterior = self.funcao_w(grafo)

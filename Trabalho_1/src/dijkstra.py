@@ -1,18 +1,23 @@
 class No:
+    
     def __init__(self, vertice) -> None:
         self.vertice = int(vertice)
         self.antecessor = None
         self.distancia = float('inf')
         self.conhecido = False
     
+
     @classmethod
     def create_node(cls, vertice):
         return cls(vertice)
 
 class Dijkstra:
+
+
     def __init__(self) -> None:
         self.__vertices = []
     
+
     # método que retorna o vértice com menor distância
     def verticeMinimo(self):
         minVertice = None
@@ -29,6 +34,7 @@ class Dijkstra:
                         minDistance = no.distancia
         return minVertice
     
+
     # método que fará a execução do Dijkstra
     def busca(self, grafo, origem):
         # cria nós para cada vértice do grafo
@@ -61,6 +67,7 @@ class Dijkstra:
                         self.__vertices[v-1].antecessor = self.__vertices[minVertice-1]
 
         return self.__vertices
+
 
     # método que vai retornar a lista de antecessores de cada vértice, ou seja
     # seu caminho até o vértice de origem

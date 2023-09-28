@@ -16,5 +16,6 @@ def main():
     niveis = BuscadorEmLargura().buscar(grafo, args.vertice)
     for i, nivel in enumerate(niveis):
         print(f"{i}: " + ",".join([str(v) for v in nivel]))
+        
 
 main()

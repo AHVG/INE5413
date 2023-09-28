@@ -5,6 +5,7 @@ import random
 
 class CicloEuleriano:
     
+    
     def buscarSubcicloEuleriano(self, grafo: Grafo, v: int, arestas: list) -> list:
         ciclo = [v]
         t = v
@@ -32,6 +33,7 @@ class CicloEuleriano:
 
         return True, novoCiclo
     
+
     def hierholzer(self, grafo):
         arestas = grafo.obterArestasSemRepeticao()
         v = random.choice(arestas)[0]
