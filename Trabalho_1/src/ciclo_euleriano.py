@@ -5,48 +5,32 @@ import random
 
 class CicloEuleriano:
     
-    def buscarSubcicloEuleriano(self, grafo: Grafo, v: int, arestas) -> list:
+    def buscarSubcicloEuleriano(self, grafo: Grafo, v: int, arestas: list) -> list:
         ciclo = [v]
         t = v
         while True:
-            
-            arestasParaVizinhosV = grafo.obterArestasParaVizinhos(v)
-            tem_aresta = False
-            for aresta in arestas:
-                if aresta in arestasParaVizinhosV:
-                    tem_aresta = True
-                    break
 
-            if not tem_aresta:
+            arestasVizinhasV = list(filter(lambda aresta: aresta[0] == v, arestas))
+            if not len(arestasVizinhasV):
                 return False, None
-            
-            
 
-            for i in range(len(self.__c)):
-                for j in range(len(self.__c)):
-                    if self.__c[i][j] == False: #selecionar e que pertence a E tal que Ce = False (por isso u = j+1 e v = i+1)
-                        u = j+1
-                        v= i+1
-                        break_ambos = True
-                        break
-                if break_ambos:
-                    break
-    
-            self.__c[v-1][u-1] = True #C[v][u] = True
-            v = u
+            arestaEsolhida = random.choice(arestasVizinhasV)
+            arestas.remove(arestaEsolhida)
+            v = arestaEsolhida[1]
             ciclo.append(v)
             if v == t:
                 break
-        
-        for x in ciclo:
-            for w in grafo.vizinhos(x): #para cada x no ciclo e para cada W vizinho desse X tal que essa aresta eh falsa
-                if not self.__c[x-1][w-1]:
-                    r, subciclo = self.buscarSubcicloEuleriano(grafo, w)
-                    if not r: #se r = false
-                        return False, None
-                    ciclo = ciclo[:ciclo.index(x)+1] + subciclo + ciclo[ciclo.index(x)+1:] #assumindo que ciclo...
 
-        return True, ciclo
+        novoCiclo = ciclo[:]
+        for i, verticeCiclo in enumerate(ciclo):
+            for origem, destino in arestas:
+                if origem == verticeCiclo:
+                    r, subCiclo = self.buscarSubcicloEuleriano(grafo, origem, arestas)
+                    if not r:
+                        return False, None
+                    novoCiclo = novoCiclo[:i] + subCiclo + novoCiclo[i + 1:]
+
+        return True, novoCiclo
     
     def hierholzer(self, grafo):
         arestas = grafo.obterArestasSemRepeticao()
@@ -55,7 +39,6 @@ class CicloEuleriano:
         print("Arestas:", arestas)
         print("Vertice inicial:", v)
         
-        return None, True
         r, ciclo = self.buscarSubcicloEuleriano(grafo, v, arestas)
         if not r:
             return False, None
