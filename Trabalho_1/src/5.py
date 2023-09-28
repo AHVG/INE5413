@@ -13,4 +13,5 @@ def main():
     for linha in distanciasMinimas:
         print(" ".join(linha))
 
+
 main()

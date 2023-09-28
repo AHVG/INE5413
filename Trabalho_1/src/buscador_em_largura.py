@@ -2,6 +2,7 @@
 
 class BuscadorEmLargura:
 
+
     def buscar(self, grafo, vertice):
         niveis = [] # Cada indice é um nivel (lista de lista e não matriz)
         vertices = [vertice]

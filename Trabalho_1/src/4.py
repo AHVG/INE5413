@@ -1,5 +1,5 @@
 from grafo import Grafo
-from ciclo_euleriano import CicloEuleriano
+from dijkstra import Dijkstra
 import argparse
 
 def main():
@@ -8,17 +8,14 @@ def main():
     parser.add_argument('-v', '--vertice', action='store', type=int, required=True, help="Vertice que será analisado")
     args = parser.parse_args()
 
-    grafo = Grafo()
+    grafo = Grafo(True, True)
     grafo.ler(args.file)
     inicio = args.vertice
-    niveis = CicloEuleriano().EulerianTour(grafo, inicio)
-    cont = 0
-    if(niveis != None):
-        print("1")
-        for i in niveis:
-            print(i, end=" ") #tem que arrumar o print dps
-        print()
-    else:
-        print("Não é euleriano")
+    niveis = Dijkstra().busca(grafo, inicio)
+    for no in niveis:
+        lista_antecessores = Dijkstra().getAntecessores(no)
+        lista_antecessores_com_virgula = ",".join(str(x) for x in lista_antecessores)
+        print(f"{no.vertice}: {lista_antecessores_com_virgula}; d={int(no.distancia)}")
+
 
 main()
