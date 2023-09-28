@@ -62,6 +62,9 @@ class Grafo:
                     vizinhos.append((l + 1, c + 1))
         return vizinhos[:]
     
+    def obterArestasParaVizinhos(self, v):
+        return [(v, vizinho) for vizinho in self.vizinhos()]
+    
     def obterArestasSemRepeticao(self):
         arestas = []
         for l, linha in enumerate(self.__matriz_de_adjacencia):

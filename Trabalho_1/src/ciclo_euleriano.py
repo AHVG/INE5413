@@ -5,14 +5,23 @@ import random
 
 class CicloEuleriano:
     
-    def buscarSubcicloEuleriano(self, grafo: Grafo, v: int) -> list:
+    def buscarSubcicloEuleriano(self, grafo: Grafo, v: int, arestas) -> list:
         ciclo = [v]
         t = v
-        while v == t:
-            break_ambos = False
-            for u in grafo.vizinhos(v): # se nao existe nenhum vizinho de V tal que c[u][v] eh falso
-                if self.__c[u-1][v-1]:
-                    return False, None
+        while True:
+            
+            arestasParaVizinhosV = grafo.obterArestasParaVizinhos(v)
+            tem_aresta = False
+            for aresta in arestas:
+                if aresta in arestasParaVizinhosV:
+                    tem_aresta = True
+                    break
+
+            if not tem_aresta:
+                return False, None
+            
+            
+
             for i in range(len(self.__c)):
                 for j in range(len(self.__c)):
                     if self.__c[i][j] == False: #selecionar e que pertence a E tal que Ce = False (por isso u = j+1 e v = i+1)
@@ -26,6 +35,8 @@ class CicloEuleriano:
             self.__c[v-1][u-1] = True #C[v][u] = True
             v = u
             ciclo.append(v)
+            if v == t:
+                break
         
         for x in ciclo:
             for w in grafo.vizinhos(x): #para cada x no ciclo e para cada W vizinho desse X tal que essa aresta eh falsa
@@ -40,16 +51,17 @@ class CicloEuleriano:
     def hierholzer(self, grafo):
         arestas = grafo.obterArestasSemRepeticao()
         v = random.randint(1, grafo.qtdVertices())
+
         print("Arestas:", arestas)
         print("Vertice inicial:", v)
-        return True, ()
+        
+        return None, True
         r, ciclo = self.buscarSubcicloEuleriano(grafo, v, arestas)
-        if not r: #se r = false
+        if not r:
             return False, None
-
-        for i in range(len(self.__c)):
-            for j in range(len(self.__c)):
-                if self.__c[i][j] == False: #se ainda ha uma aresta nao visitada, entao retorna falso
-                    return False, None
+        
+        # vai excluindo as arestas da lista, se sobrar quer dizer que tem aresta não visitada
+        if len(arestas):
+            return False, None
                 
         return True, ciclo
