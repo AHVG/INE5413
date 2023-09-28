@@ -1,34 +1,35 @@
 class No:
-    
+    # classe nó responsável por cada vértice do grafo
+    # cada nó possui um vértice, um antecessor, uma distância e um booleano conhecido(se foi visitado ou não)
     def __init__(self, vertice) -> None:
         self.vertice = int(vertice)
         self.antecessor = None
         self.distancia = float('inf')
         self.conhecido = False
     
-
+    # factory para criar as instâncias de nó
     @classmethod
     def create_node(cls, vertice):
         return cls(vertice)
 
 class Dijkstra:
-
-
+    # classe responsável por executar o algoritmo de Dijkstra
     def __init__(self) -> None:
         self.__vertices = []
     
-
     # método que retorna o vértice com menor distância
     def verticeMinimo(self):
         minVertice = None
         minDistance = -1
 
         for no in self.__vertices:
+            # caso o nó não for conhecido, então ele é um candidato a ser o menor
             if no.conhecido == False:
                 if minDistance == -1:
                     minVertice = no.vertice
                     minDistance = no.distancia
                 else:
+                    # se a distância do nó for menor que a distância mínima, então ele é o novo mínimo
                     if minDistance > no.distancia:
                         minVertice = no.vertice
                         minDistance = no.distancia

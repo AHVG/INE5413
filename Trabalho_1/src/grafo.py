@@ -46,7 +46,8 @@ class Grafo:
 
 
     def ler(self, arquivo):
-        # TODO: É possível fazer bem melhor que isso
+        # Arquivo de entrada nao pode ter linha em branca(a mais)
+        # a além disso, não pode ter espaços entre o rótulo ou seja, (Nova Trento não funciona) mas (Nova_Trento sim)
         with open(arquivo, "r") as arq:
             linhas = arq.read().split("\n")
         numero_de_vertices = int(linhas[0].split()[1])
