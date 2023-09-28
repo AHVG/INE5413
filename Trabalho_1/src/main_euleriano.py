@@ -12,6 +12,4 @@ def main():
     tem, ciclo = CicloEuleriano().hierholzer(grafo)
     print(tem, ciclo)
 
-
-
 main()
