@@ -8,8 +8,8 @@ class CicloEuleriano:
     def buscarSubcicloEuleriano(self, grafo: Grafo, v: int, arestas: list) -> list:
         ciclo = [v]
         t = v
-        while True:
 
+        while True:
             arestasVizinhasV = list(filter(lambda aresta: aresta[0] == v, arestas))
             if not len(arestasVizinhasV):
                 return False, None
@@ -33,7 +33,7 @@ class CicloEuleriano:
         return True, novoCiclo
     
     def hierholzer(self, grafo):
-        arestas = grafo.obterArestasSemRepeticao()
+        arestas = grafo.obterArestas()
         v = random.randint(1, grafo.qtdVertices())
 
         print("Arestas:", arestas)
