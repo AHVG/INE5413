@@ -12,8 +12,14 @@ def main():
     grafo.ler(args.file)
 
 
-    a = Kruskal().busca(grafo)
-    print(a)
+    a, peso = Kruskal().busca(grafo)
+
+    formatado = [f"{x}-{y}" for x, y in a]
+
+    resultado = ' '.join(formatado)
+
+    print(peso)
+    print(resultado)
     
 
 main()
