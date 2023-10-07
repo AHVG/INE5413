@@ -52,9 +52,7 @@ class Grafo:
         # obtem as linhas do arquivo
         with open(arquivo, "r") as arq:
             linhas = arq.read().split("\n")
-        for i in linhas:
-            if i == '':
-                linhas.remove(i)
+        linhas = list(filter(lambda x: x, linhas))
         
         # pega a primeira do arquivo e obtem o numero de vertices
         numero_de_vertices = int(linhas[0].split()[1])
@@ -66,12 +64,7 @@ class Grafo:
 
         # obtem os rotulos 
         rotulos = linhas[inicio_leitura_de_vertices:inicio_leitura_de_edges - 1]
-
-        for i in rotulos:
-            split = i.split()
-            if len(split) > 2:
-                split[1] = split[1] + ' ' + split[2]
-            self.__rotulos.append(split[1])
+        self.__rotulos = [" ".join((rotulo[1:])).replace('"','') for rotulo in map(lambda x: x.split(), rotulos)]
 
         # obtem todas as informacoes das arestas e cria matriz de adjacencia
         arestas = linhas[inicio_leitura_de_edges:]
