@@ -1,9 +1,9 @@
 *vertices 6
 1 "Cafeteira"
 2 "Forno"
-3 "Torneira Elétrica"
+3 "Torneira_Elétrica"
 4 "TV"
-5 "Modem Wireless"
+5 "Modem_Wireless"
 6 "Geladeira"
 *edges
 1 2 1.0

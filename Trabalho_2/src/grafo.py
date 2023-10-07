@@ -113,7 +113,3 @@ class Grafo:
     def __str__(self):
         # metodo inutil
         return str(self.__matriz_de_adjacencia)
-
-
-grafo = Grafo()
-grafo.ler("/home/bridge/Documentos/INE5413/Trabalho_2/src/entradas/arvore_geradora_minima/agm_tiny.net")
