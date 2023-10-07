@@ -53,7 +53,7 @@ class Grafo:
         with open(arquivo, "r") as arq:
             linhas = arq.read().split("\n")
         linhas = list(filter(lambda x: x, linhas))
-        
+
         # pega a primeira do arquivo e obtem o numero de vertices
         numero_de_vertices = int(linhas[0].split()[1])
 
@@ -105,5 +105,4 @@ class Grafo:
 
 
     def __str__(self):
-        # metodo inutil
         return str(self.__matriz_de_adjacencia)
