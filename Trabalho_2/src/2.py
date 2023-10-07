@@ -1,5 +1,4 @@
 from grafo import Grafo
-from kruskal import Kruskal
 import argparse
 
 def main():
@@ -11,16 +10,6 @@ def main():
     grafo = Grafo()
     grafo.ler(args.file)
 
-
-    a, peso = Kruskal().busca(grafo)
-
-    formatado = [f"{x}-{y}" for x, y in a]
-
-    resultado = ' '.join(formatado)
-
-    print(peso)
-    print(resultado)
-    
-
+        
 if __name__ == "__main__":
     main()

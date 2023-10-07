@@ -7,9 +7,9 @@ class Grafo:
     sem_aresta = float("Inf") # Pode ser qualquer outro valor mágico, mas foi escolhido infinito pq é o mais descritivo
 
 
-    def __init__(self):
-        self.ehDirigido = False
-        self.ehPonderado = True
+    def __init__(self, eh_dirigido=False, eh_ponderado=True):
+        self.eh_dirigido = eh_dirigido
+        self.eh_ponderado = eh_ponderado
         self.__rotulos = []
         self.__matriz_de_adjacencia = []
     
@@ -56,9 +56,9 @@ class Grafo:
 
         # verificando se é dirigido ou não
         if "*edges" not in linhas:
-            self.ehDirigido = True
+            self.eh_dirigido = True
         else:
-            self.ehDirigido = False
+            self.eh_dirigido = False
 
         # pega a primeira do arquivo e obtem o numero de vertices
         numero_de_vertices = int(linhas[0].split()[1])
@@ -80,9 +80,9 @@ class Grafo:
         for u, v, p in map(lambda x: map(float, x.split()), arestas):
             u = int(u) - 1
             v = int(v) - 1
-            if not self.ehPonderado: p = 1
+            if not self.eh_ponderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
-            if not self.ehDirigido: self.__matriz_de_adjacencia[v][u] = p
+            if not self.eh_dirigido: self.__matriz_de_adjacencia[v][u] = p
 
 
     def obterArestas(self):
