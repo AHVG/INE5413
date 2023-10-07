@@ -7,15 +7,19 @@ class Grafo:
     sem_aresta = float("Inf") # Pode ser qualquer outro valor mágico, mas foi escolhido infinito pq é o mais descritivo
 
 
-    def __init__(self, eh_dirigido=False, eh_ponderado=True):
+    def __init__(self, rotulos=[], matriz=[], eh_ponderado=True, eh_dirigido=False):
         self.eh_dirigido = eh_dirigido
         self.eh_ponderado = eh_ponderado
-        self.__rotulos = []
-        self.__matriz_de_adjacencia = []
-    
+        self.__rotulos = copy.deepcopy(rotulos)
+        self.__matriz_de_adjacencia = copy.deepcopy(matriz)
+
 
     def obterMatriz(self):
         return copy.deepcopy(self.__matriz_de_adjacencia)
+    
+
+    def obterRotulos(self):
+        return copy.deepcopy(self.__rotulos)
 
 
     def qtdVertices(self):
@@ -83,6 +87,16 @@ class Grafo:
             if not self.eh_ponderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
             if not self.eh_dirigido: self.__matriz_de_adjacencia[v][u] = p
+
+
+    def obterTransposto(self):
+        matriz_transposta = [[Grafo.sem_aresta for _ in range(self.qtdVertices())] for _ in range(self.qtdVertices())]
+
+        for i, linha in enumerate(self.__matriz_de_adjacencia):
+            for j, peso in enumerate(linha):
+                matriz_transposta[j][i] = peso
+
+        return Grafo(matriz=matriz_transposta, rotulos=self.obterRotulos(), eh_dirigido=self.eh_dirigido, eh_ponderado=self.eh_ponderado)
 
 
     def obterArestas(self):
