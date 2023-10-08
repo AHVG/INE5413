@@ -12,7 +12,7 @@ def main():
     grafo = Grafo(eh_dirigido=True, eh_ponderado=False)
     grafo.ler(args.file)
 
-    componentes = FortementeConexas().buscarPorComponentes(grafo)
+    componentes = FortementeConexas().buscar_por_componentes(grafo)
     
     for componente in componentes:
         print(componente)

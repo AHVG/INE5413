@@ -32,7 +32,7 @@ class FortementeConexas:
         return copy.deepcopy(componentes)
 
 
-    def buscarPorComponentes(self, grafo):
+    def buscar_por_componentes(self, grafo):
         C, T, A, F = self.DFS(grafo)
 
         grafo_transposto = grafo.obterTransposto() # O bom seria uma fabrica para criar grafos
