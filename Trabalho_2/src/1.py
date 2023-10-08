@@ -2,6 +2,7 @@ from grafo import Grafo
 from fortemente_conexas import FortementeConexas
 import argparse
 
+
 def main():
     # Paramêtro de programa
     parser = argparse.ArgumentParser()
@@ -11,8 +12,11 @@ def main():
     grafo = Grafo(eh_dirigido=True, eh_ponderado=False)
     grafo.ler(args.file)
 
-    A = FortementeConexas().buscarPorComponentes(grafo)
-    print(A)
+    componentes = FortementeConexas().buscarPorComponentes(grafo)
+    
+    for componente in componentes:
+        print(componente)
+
 
 if __name__ == "__main__":
     main()
