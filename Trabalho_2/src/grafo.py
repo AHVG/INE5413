@@ -106,7 +106,7 @@ class Grafo:
 
     def obterArestasParaVizinhos(self, v):
         # retorna todas arestas de um vertice em especifico
-        return [(v, vizinho) for vizinho in self.vizinhos()]
+        return [(v, vizinho) for vizinho in self.vizinhos(v)]
     
 
     def obterArestasSemRepeticao(self):
