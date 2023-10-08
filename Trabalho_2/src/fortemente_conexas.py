@@ -1,12 +1,14 @@
 import copy
 
 class FortementeConexas:
+    # Todas listas tem um elmento inutil, o primeiro, para não ficar colocando - 1 ou + 1 nos indices
 
     def __init__(self):
         self.tempo = 0 # Passar por parâmetro não funciona, pois é uma copia (GAMBIARRA)
 
 
     def converter_para_componentes(self, A):
+        # Converte o vetor A em uma lista com cada uma das componentes fortemente ligadas do grafo
         casas_iniciais = {}
         
         for i, v in enumerate(A[1:]):
