@@ -8,11 +8,11 @@ def main():
     parser.add_argument('-f', '--file', action='store', type=str, required=True, help="Path do arquivo que tem o grafo")
     args = parser.parse_args()
 
-    grafo = Grafo()
+    grafo = Grafo(eh_dirigido=True, eh_ponderado=False)
     grafo.ler(args.file)
 
-    FortementeConexas().buscarPorComponentes(grafo)
-
+    A = FortementeConexas().buscarPorComponentes(grafo)
+    print(A)
 
 if __name__ == "__main__":
     main()
