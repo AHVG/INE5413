@@ -25,7 +25,7 @@ class Kruskal:
         # Atualizacao da identidade das arvores
         cont = 0
         peso = 0
-        for u,v in ordered_dic.keys():
+        for u, v in ordered_dic.keys():
             if s[u - 1] != s[v - 1]:
                 cont += 1
                 a.add((u,v))
