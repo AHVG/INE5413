@@ -2,7 +2,7 @@ import copy
 
 class FortementeConexas:
     """
-        Classe que obtem as componentes fortemente conexas de um grafo
+        Classe que obtêm as componentes fortemente conexas de um grafo
     """
 
     def __init__(self):
@@ -19,7 +19,7 @@ class FortementeConexas:
         Obs.: Primeiro elemento não é considerado
 
         @param: vetor A de antecessores
-        
+
         @return: vetor de componentes
 
         """
@@ -27,7 +27,7 @@ class FortementeConexas:
         # Converte o vetor A em uma lista com cada uma das componentes fortemente ligadas do grafo
         florestas = {}
         
-        # Obtem todos os vertices que não possuem antecessor
+        # Obtêm todos os vertices que não possuem antecessor
         for i, v in enumerate(A[1:]):
             if v is None:
                 florestas[i + 1] = [] # Perceba que é um dicionário e a chave é um inteiro

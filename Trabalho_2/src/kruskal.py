@@ -9,7 +9,7 @@ from grafo import Grafo
 
 class Kruskal:
     """
-    Classe que obtem a arvore mínima geradora
+    Classe que obtêm a arvore mínima geradora
     """
     
     def busca(self, G):

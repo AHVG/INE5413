@@ -47,7 +47,7 @@ class CicloEuleriano:
     
 
     def hierholzer(self, grafo):
-        # obtem todas arestas sem repeticao ((1,2) == (2,1)),
+        # obtêm todas arestas sem repeticao ((1,2) == (2,1)),
         # pois quando se visita a aresta (1,2) não é possível
         # voltar pela (2,1) (vide definição de um ciclo euleriano)
         arestas = grafo.obterArestasSemRepeticao()

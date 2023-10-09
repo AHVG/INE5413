@@ -49,12 +49,12 @@ class Grafo:
         # Arquivo de entrada nao pode ter linha em branca (a mais)
         # além disso, não pode ter espaços entre o rótulo ou seja, (Nova Trento não funciona) mas (Nova_Trento sim)
         
-        # obtem as linhas do arquivo
+        # obtêm as linhas do arquivo
         with open(arquivo, "r") as arq:
             linhas = arq.read().split("\n")
         linhas = list(filter(lambda x: x, linhas))
 
-        # pega a primeira do arquivo e obtem o numero de vertices
+        # pega a primeira do arquivo e obtêm o numero de vertices
         numero_de_vertices = int(linhas[0].split()[1])
 
         # define a primeira linha em que tem as informacoes do vertice
@@ -62,11 +62,11 @@ class Grafo:
         inicio_leitura_de_vertices = 1
         inicio_leitura_de_edges = numero_de_vertices + 2
 
-        # obtem os rotulos 
+        # obtêm os rotulos 
         rotulos = linhas[inicio_leitura_de_vertices:inicio_leitura_de_edges - 1]
         self.__rotulos = [" ".join((rotulo[1:])).replace('"','') for rotulo in map(lambda x: x.split(), rotulos)]
 
-        # obtem todas as informacoes das arestas e cria matriz de adjacencia
+        # obtêm todas as informacoes das arestas e cria matriz de adjacencia
         arestas = linhas[inicio_leitura_de_edges:]
         self.__matriz_de_adjacencia = [[self.sem_aresta] * numero_de_vertices for _ in range(numero_de_vertices)]
 
