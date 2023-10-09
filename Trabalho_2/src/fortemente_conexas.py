@@ -19,6 +19,7 @@ class FortementeConexas:
         Obs.: Primeiro elemento não é considerado
 
         @param: vetor A de antecessores
+        
         @return: vetor de componentes
 
         """
@@ -55,96 +56,98 @@ class FortementeConexas:
         return copy.deepcopy(componentes)
 
 
-    def buscar_por_componentes(self, grafo):
+    def buscar_por_componentes(self, G):
         """
         Função que busca por componentes conexas
         
-        @param: grafo que será analisado
+        @param: G grafo que será analisado
+
         @return: componentes conexas do grafo
 
         """
 
         # Primeira DFS
-        C, T, A, F = self.DFS(grafo)
+        C, T, A, F = self.DFS(G)
 
         # Cria o grafo "transposto"
-        grafo_transposto = grafo.obterTransposto() # O bom seria uma fabrica para criar grafos
+        G_transposto = G.obterTransposto() # O bom seria uma fabrica para criar grafos
 
         # Segunda DFS, só que adapatada para pegar os vertices com maior tempo final primeiro
-        C_transposto, T_transposto, A_transposto, F_transposto = self.DFS_adaptado(grafo_transposto, F)
+        C_transposto, T_transposto, A_transposto, F_transposto = self.DFS_adaptado(G_transposto, F)
 
         # Convertendo o vetor de antecessores para uma lista de componentes
         return self.converter_para_componentes(A_transposto)
 
 
-    def DFS(self, grafo):
+    def DFS(self, G):
         """
         Busca por profundidade
 
-        @param: grafo em que será aplicado a busca por profundidade
+        @param: G grafo em que será aplicado a busca por profundidade
+
         @return: C, T, F, A onde C é o vetor de visistados, T o de tempo inicial, F o de final e A de antecessor
 
         """
 
         # Criando os vetores do retorno com um indice a mais para facilitar a implementação do algoritmo
         # Todas listas tem um elmento inutil, o primeiro, para não ficar colocando - 1 ou + 1 nos indices
-        C = [False          for _ in range(grafo.qtdVertices() + 1)] # Todos os vertices não visitados
-        T = [float("Inf")   for _ in range(grafo.qtdVertices() + 1)] # Tempo inicial infinito
-        F = [float("Inf")   for _ in range(grafo.qtdVertices() + 1)] # Tempo final infinito
-        A = [None           for _ in range(grafo.qtdVertices() + 1)] # Todos vertices sem antecessores
+        C = [False          for _ in range(G.qtdVertices() + 1)] # Todos os vertices não visitados
+        T = [float("Inf")   for _ in range(G.qtdVertices() + 1)] # Tempo inicial infinito
+        F = [float("Inf")   for _ in range(G.qtdVertices() + 1)] # Tempo final infinito
+        A = [None           for _ in range(G.qtdVertices() + 1)] # Todos vertices sem antecessores
 
         # Zerando o contador de tempo
         self.tempo = 0
 
         # Fazendo as visitadas
-        for v in range(1, grafo.qtdVertices() + 1):
+        for v in range(1, G.qtdVertices() + 1):
             if not C[v]:
-                self.DFS_visit(grafo, v, C, T, A, F)
+                self.DFS_visit(G, v, C, T, A, F)
 
         return C, T, A, F
 
 
-    def DFS_adaptado(self, grafo, F_linha):
+    def DFS_adaptado(self, G, F_linha):
         """
         Busca por profundidade adapatada para que se escolha primeiro os vertices com maior valor de F
 
-        @param: grafo em que será aplicado a busca por profundidade
+        @param: G grafo em que será aplicado a busca por profundidade
+
         @return: C, T, F, A onde C é o vetor de visistados, T o de tempo inicial, F o de final e A de antecessor
         
         """
 
         # Criando os vetores do retorno com um indice a mais para facilitar a implementação do algoritmo
         # Todas listas tem um elmento inutil, o primeiro, para não ficar colocando - 1 ou + 1 nos indices
-        C = [False          for _ in range(grafo.qtdVertices() + 1)] # Todos os vertices não visitados
-        T = [float("Inf")   for _ in range(grafo.qtdVertices() + 1)] # Tempo inicial infinito
-        F = [float("Inf")   for _ in range(grafo.qtdVertices() + 1)] # Tempo final infinito
-        A = [None           for _ in range(grafo.qtdVertices() + 1)] # Todos vertices sem antecessores
+        C = [False          for _ in range(G.qtdVertices() + 1)] # Todos os vertices não visitados
+        T = [float("Inf")   for _ in range(G.qtdVertices() + 1)] # Tempo inicial infinito
+        F = [float("Inf")   for _ in range(G.qtdVertices() + 1)] # Tempo final infinito
+        A = [None           for _ in range(G.qtdVertices() + 1)] # Todos vertices sem antecessores
 
         # Zerando o contador de tempo e ordenando a lista de vertices de acordo com seu tempo final (os com maior valor vem primeiro)
         self.tempo = 0
-        vertices_ordenados = sorted(zip(list(range(1, grafo.qtdVertices() + 1)), F_linha[1:]),
+        vertices_ordenados = sorted(zip(list(range(1, G.qtdVertices() + 1)), F_linha[1:]),
                                      key=lambda x: x[1], reverse=True)
 
         # Fazendo as visitas
         for v, _ in vertices_ordenados:
             if not C[v]:
-                self.DFS_visit(grafo, v, C, T, A, F)
+                self.DFS_visit(G, v, C, T, A, F)
 
         return C, T, A, F
 
 
-    def DFS_visit(self, grafo, v, C, T, A, F):
+    def DFS_visit(self, G, v, C, T, A, F):
         """
         Função que visita efetivamente um vertice
 
-        @param: grafo em que foi aplicado a busca por pronfundidade
+        @param: G grafo em que foi aplicado a busca por pronfundidade
         @param: v vertice atual
         @param: C vetor de visitados
         @param: T vetor do tempo inicial
         @param: A vetor de antecessores
         @param: F vetor de tempo final
 
-        @return: Nada
         """
         # Define o vertice atual como visitado e seu tempo inicial
         C[v] = True
@@ -152,10 +155,10 @@ class FortementeConexas:
         T[v] = self.tempo
 
         # Visita todos seus vizinhos ainda não visitados
-        for u in grafo.vizinhos(v):
+        for u in G.vizinhos(v):
             if not C[u]:
                 A[u] = v
-                self.DFS_visit(grafo, u, C, T, A, F)
+                self.DFS_visit(G, u, C, T, A, F)
 
         # Define seu tempo final
         self.tempo += 1

@@ -3,6 +3,8 @@ from kruskal import Kruskal
 import argparse
 
 def main():
+    """ Entrada do programa """
+
     # Paramêtro de programa
     # Recebe um caminho do arquivo em que está o grafo
     parser = argparse.ArgumentParser()

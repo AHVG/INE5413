@@ -1,9 +1,12 @@
 
 
 class OrdenacaoTopologica:
+    """
+        Classe que obtem a ordenação topologica de um grafo
+    """
     
     def __init__(self):
-        self.tempo = 0
+        self.tempo = 0 # Passar por parâmetro não funciona, pois é uma copia
     
     def ordena(self, G):
         C = [False          for _ in range(G.qtdVertices())]
