@@ -4,16 +4,22 @@ import argparse
 
 
 def main():
+    """ Entrada do programa """
+
     # Paramêtro de programa
+    # Recebe um caminho do arquivo em que está o grafo
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', action='store', type=str, required=True, help="Path do arquivo que tem o grafo")
     args = parser.parse_args()
 
+    # Cria o grafo a partir do arquivo passado por parâmetro
     grafo = Grafo(eh_dirigido=True, eh_ponderado=False)
     grafo.ler(args.file)
 
-    componentes = FortementeConexas().buscarPorComponentes(grafo)
+    # Obtendo as componentes fortemente conexas
+    componentes = FortementeConexas().buscar_por_componentes(grafo)
     
+    # Mostrando no terminal cada uma
     for componente in componentes:
         print(componente)
 

@@ -8,43 +8,52 @@ from grafo import Grafo
 # Da pra usar uma lista ligada para representar a arvore geradora
 
 class Kruskal:
+    """
+    Classe que obtêm a arvore mínima geradora
+    """
     
-    def busca(self, grafo: Grafo):
-        # Conjunto que armazena as arestas da arvore geradora
-        a = set()
+    def busca(self, G):
+        """
+        Função que busca pela arvore mínima geradora do grafo G
 
+        @param: G grafo que será analisado
+
+        @return: Os vertices da arvore mínima geradora
+        """
         # Estrutura para identificacao da arvore em cada vertice
-        s = [{i} for i in range(1, grafo.qtdVertices() + 1)]
-        
-        arestas = grafo.obterArestasSemRepeticao()
-        dic = dict()
-        for i in arestas:
-            # Dicionario com as arestas e seus respectivos pesos
-            dic[i] = grafo.peso(i[0], i[1])
-        
-        # Ordenar o dicionario pela ordem crescente de peso
-        ordered_dic = dict(sorted(dic.items(), key=lambda item: item[1]))
+        A = set()
+        S = [{i} for i in range(1, G.qtdVertices() + 1)]
 
-        # Atualizacao da identidade das arvores
-        cont = 0
+        # Criando um dicionario que mapeia aresta para peso ordenado de acordo com o peso
+        arestas = G.obterArestasSemRepeticao()
+        arestas_para_peso = dict()
+
+        for i in arestas:
+            arestas_para_peso[i] = G.peso(i[0], i[1])
+        
+        arestas_para_peso_ordenada = dict(sorted(arestas_para_peso.items(), key=lambda item: item[1]))
+
+        # Define um valor inicial a variável que indica parada (numero_de_arestas_adicionadas) e
+        # o peso da arvora mínima
+        numero_de_arestas_adicionadas = 0
         peso = 0
-        # Para cada par de arestas
-        for u, v in ordered_dic.keys():
-            # Se as arestas nao formarem ciclo
-            if s[u - 1] != s[v - 1]:
-                cont += 1
-                # Adiciona a aresta na arvore geradora
-                a.add((u,v))
-                # Atualiza a identidade das arvores
-                x = s[u-1].union(s[v-1])
+
+        # Cria interativamente a arvore mínima geradora
+        for u, v in arestas_para_peso_ordenada.keys():
+
+            # Se não tiver um ciclo, então adiciona a aresta a arvore e atualiza as arvores de S
+            if S[u - 1] != S[v - 1]:
+                numero_de_arestas_adicionadas += 1 # 
+                A.add((u,v))
+                x = S[u-1].union(S[v-1])
+
                 for y in x:
-                    # Atualiza a identidade de cada vertice
-                    s[y-1] = x
-                # Atualiza o peso da arvore geradora
-                peso += grafo.peso(u,v)
-            # A arvore geradora tem de ter n-1 arestas
-            # caso tiver, nao preciso mais iterar
-            if cont == grafo.qtdVertices() - 1:
+                    S[y-1] = x
+
+                peso += G.peso(u,v)
+
+            # Se adicionou número de vertices - 1 arestas, então termina o algoritmo
+            if numero_de_arestas_adicionadas == G.qtdVertices() - 1:
                 break
 
-        return a, peso
+        return A, peso
