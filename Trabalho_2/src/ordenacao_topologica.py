@@ -47,11 +47,11 @@ class OrdenacaoTopologica:
         T[v] = self.tempo
 
         # Visita todos seus vizinhos ainda não visitados
-        for _, u in G.obterArestasParaVizinhos(v):
+        for u in G.vizinhos(v+1):
             if not C[u-1]:
                 self.DFS_visit_OT(G, u-1, C, T, F, O)
 
         # Define seu tempo final e insere no começo do vetor O o vertice v
         self.tempo += 1
         F[v] = self.tempo
-        O.insert(0, v) 
+        O.insert(0, v+1) 
