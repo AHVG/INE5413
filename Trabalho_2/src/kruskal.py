@@ -12,7 +12,7 @@ class Kruskal:
     Classe que obtêm a arvore mínima geradora
     """
     
-    def busca(self, G):
+    def busca(self, G: Grafo) -> (set, float):
         """
         Função que busca pela arvore mínima geradora do grafo G
 
