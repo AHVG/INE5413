@@ -95,7 +95,6 @@ class Grafo:
             linhas = arq.read().split("\n")
         
         linhas = list(filter(lambda x: x, linhas))
-        print(linhas)
 
         numero_de_vertices = 0
         arestas = []
@@ -106,9 +105,6 @@ class Grafo:
         else:
             numero_de_vertices = int(linhas[0].split()[1])
             arestas = linhas[numero_de_vertices + 2:]
-
-        print(numero_de_vertices)
-        print(arestas)
 
         self.__rotulos = [str(rotulo) for rotulo in range(1, numero_de_vertices + 1)]
 
@@ -126,9 +122,6 @@ class Grafo:
                 v = int(y) - 1
 
             self.__matriz_de_adjacencia[u][v] = p
-
-        print(self.__matriz_de_adjacencia)
-        print(self.obterArestasSemRepeticao())
 
 
     def obter_vertices_bipartido(self):
