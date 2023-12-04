@@ -47,15 +47,16 @@ class Coloracao:
                 R.append(x)
         return R
     
-    def definir_cromatico_por_vertice(self, grafo, coloracao_minima):
+    def definir_cromatico_por_vertice(self, grafo):
         cores_por_vertice = [0 for _ in range(grafo.qtdVertices())]
         nao_coloridos = [i+1 for i in range(grafo.qtdVertices())]
+        cor = 1
         while len(nao_coloridos):
             conjunto_independente_maximal = self.conjuntos_independentes_maximais(nao_coloridos, grafo)[0]
             for elemento in conjunto_independente_maximal:
-                cores_por_vertice[elemento - 1] = coloracao_minima
+                cores_por_vertice[elemento - 1] = cor
                 nao_coloridos.remove(elemento)
-            coloracao_minima -= 1
+            cor += 1
         return cores_por_vertice
 
 
