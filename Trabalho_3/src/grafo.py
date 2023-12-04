@@ -59,6 +59,10 @@ class Grafo:
             linhas = arq.read().split("\n")
         linhas = list(filter(lambda x: x, linhas))
 
+        # define se o grafo é dirigido ou nao
+        if "*arcs" in linhas:
+            self.eh_dirigido = True
+
         # pega a primeira do arquivo e obtêm o numero de vertices
         numero_de_vertices = int(linhas[0].split()[1])
 
@@ -79,7 +83,6 @@ class Grafo:
         for u, v, p in map(lambda x: map(float, x.split()), arestas):
             u = int(u) - 1
             v = int(v) - 1
-            if not self.eh_ponderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
             if not self.eh_dirigido: self.__matriz_de_adjacencia[v][u] = p
 
@@ -93,6 +96,19 @@ class Grafo:
 
         return Grafo(matriz=matriz_transposta, rotulos=self.obterRotulos(), eh_dirigido=self.eh_dirigido, eh_ponderado=self.eh_ponderado)
 
+    def obterGrafoResidual(self):
+        # retorna o grafo residual
+        grafo_residual = [[Grafo.sem_aresta for _ in range(self.qtdVertices())] for _ in range(self.qtdVertices())]
+        arestas = self.obterArestasSemRepeticao()
+        for u, v in arestas:
+            grafo_residual[u - 1][v - 1] = self.peso(u, v)
+            grafo_residual[v - 1][u - 1] = 0
+            
+        return Grafo(matriz=grafo_residual, rotulos=self.obterRotulos(), eh_dirigido=self.eh_dirigido, eh_ponderado=self.eh_ponderado)
+    
+    def atualizaPesoAresta(self, u, v, peso):
+        # atualizada o peso de uma aresta
+        self.__matriz_de_adjacencia[u - 1][v - 1] = peso
 
     def obterArestas(self):
         # retorna todas arestas do grafo
@@ -120,5 +136,4 @@ class Grafo:
 
 
     def __str__(self):
-        # metodo inutil
         return str(self.__matriz_de_adjacencia)
