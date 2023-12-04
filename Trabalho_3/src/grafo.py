@@ -135,8 +135,8 @@ class Grafo:
         if not self.eh_bipartido:
             return None
         
-        X = [v for v in range(1, self.qtdVertices()/2 + 1)]
-        Y = [v for v in range(self.qtdVertices()/2 + 1, self.qtdVertices() + 1)]
+        X = [v for v in range(1, int(self.qtdVertices()/2) + 1)]
+        Y = [v for v in range(int(self.qtdVertices()/2) + 1, self.qtdVertices() + 1)]
 
         return X, Y
 

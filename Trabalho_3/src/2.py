@@ -1,5 +1,6 @@
 from grafo import Grafo
 import argparse
+from hopcroft_karp import HopcroftKarp
 
 
 def main():
@@ -14,6 +15,8 @@ def main():
     # Cria o grafo a partir do arquivo passado por parâmetro
     grafo = Grafo(eh_dirigido=False, eh_ponderado=False)
     grafo.ler_bipartido(args.file)
+
+    print(HopcroftKarp().emparelhar(grafo))
 
 
 if __name__ == "__main__":
