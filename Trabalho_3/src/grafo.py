@@ -7,9 +7,10 @@ class Grafo:
     sem_aresta = float("Inf") # Pode ser qualquer outro valor mágico, mas foi escolhido infinito pq é o mais descritivo
 
 
-    def __init__(self, rotulos=[], matriz=[], eh_ponderado=True, eh_dirigido=False):
+    def __init__(self, rotulos=[], matriz=[], eh_ponderado=True, eh_dirigido=False, eh_bipartido=False):
         self.eh_dirigido = eh_dirigido
         self.eh_ponderado = eh_ponderado
+        self.eh_bipartido = eh_bipartido
         self.__rotulos = copy.deepcopy(rotulos)
         self.__matriz_de_adjacencia = copy.deepcopy(matriz)
 
@@ -82,6 +83,62 @@ class Grafo:
             if not self.eh_ponderado: p = 1
             self.__matriz_de_adjacencia[u][v] = p
             if not self.eh_dirigido: self.__matriz_de_adjacencia[v][u] = p
+
+    
+    def ler_bipartido(self, arquivo):
+
+        self.eh_bipartido = True
+        self.eh_dirigido = True
+        self.eh_ponderado = True
+
+        with open(arquivo, "r") as arq:
+            linhas = arq.read().split("\n")
+        
+        linhas = list(filter(lambda x: x, linhas))
+        print(linhas)
+
+        numero_de_vertices = 0
+        arestas = []
+
+        if "c The cardinality of a maximum matching is" in linhas[0]:
+            numero_de_vertices = int(linhas[2].split()[2])
+            arestas = linhas[3:]
+        else:
+            numero_de_vertices = int(linhas[0].split()[1])
+            arestas = linhas[numero_de_vertices + 2:]
+
+        print(numero_de_vertices)
+        print(arestas)
+
+        self.__rotulos = [str(rotulo) for rotulo in range(1, numero_de_vertices + 1)]
+
+
+        self.__matriz_de_adjacencia = [[self.sem_aresta] * numero_de_vertices for _ in range(numero_de_vertices)]
+
+
+        for x, y, z in list(map(lambda x: x.split(), arestas)):
+            p = 1
+            if x == "e":
+                u = int(y) - 1
+                v = int(z) - 1
+            else:
+                u = int(x) - 1
+                v = int(y) - 1
+
+            self.__matriz_de_adjacencia[u][v] = p
+
+        print(self.__matriz_de_adjacencia)
+        print(self.obterArestasSemRepeticao())
+
+
+    def obter_vertices_bipartido(self):
+        if not self.eh_bipartido:
+            return None
+        
+        X = [v for v in range(1, self.qtdVertices()/2 + 1)]
+        Y = [v for v in range(self.qtdVertices()/2 + 1, self.qtdVertices() + 1)]
+
+        return X, Y
 
 
     def obterTransposto(self):
