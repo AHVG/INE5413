@@ -102,8 +102,11 @@ class Grafo:
         if "c The cardinality of a maximum matching is" in linhas[0]:
             numero_de_vertices = int(linhas[2].split()[2])
             arestas = linhas[3:]
-        else:
+        elif len(linhas[0].split()) > 1:
             numero_de_vertices = int(linhas[0].split()[1])
+            arestas = linhas[numero_de_vertices + 2:]
+        else:
+            numero_de_vertices = len(linhas[linhas.index("*vertices") + 1: linhas.index("*edges")])
             arestas = linhas[numero_de_vertices + 2:]
 
         self.__rotulos = [str(rotulo) for rotulo in range(1, numero_de_vertices + 1)]
@@ -111,17 +114,22 @@ class Grafo:
 
         self.__matriz_de_adjacencia = [[self.sem_aresta] * numero_de_vertices for _ in range(numero_de_vertices)]
 
-
-        for x, y, z in list(map(lambda x: x.split(), arestas)):
-            p = 1
-            if x == "e":
-                u = int(y) - 1
-                v = int(z) - 1
+        
+        for aresta in arestas:
+            if len(aresta.split()) == 3:
+                x, y, z = aresta.split()
+                if x == "e":
+                    u, v = y, z
+                else:
+                    u, v = x, y
             else:
-                u = int(x) - 1
-                v = int(y) - 1
+                u, v = aresta.split()
 
-            self.__matriz_de_adjacencia[u][v] = p
+            u = int(u) - 1
+            v = int(v) - 1
+
+            self.__matriz_de_adjacencia[u][v] = 1
+
 
 
     def obter_vertices_bipartido(self):
