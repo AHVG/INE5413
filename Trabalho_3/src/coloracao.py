@@ -18,7 +18,7 @@ class Coloracao:
                         matriz_adjacencia[v][u] = 1
 
             G_linha = Grafo(eh_dirigido=False, eh_ponderado=False, matriz=matriz_adjacencia)
-            for I in self.conjuntos_independentes_maximais(G_linha):
+            for I in self.conjuntos_independentes_maximais([i+1 for i in range(G_linha.qtdVertices())], G_linha):
                 s_i = list(S)[:]
                 for j in range(len(s_i)):
                     s_i[j] = S.index(s_i[j]) + 1                
@@ -29,8 +29,8 @@ class Coloracao:
         return X[-1]
             
 
-    def conjuntos_independentes_maximais(self, grafo):
-        S = self.conjunto_potencia([i+1 for i in range(grafo.qtdVertices())])
+    def conjuntos_independentes_maximais(self, vertices, grafo):
+        S = self.conjunto_potencia(vertices)
         S.reverse()
         R = []
         for x in S:
@@ -49,20 +49,13 @@ class Coloracao:
     
     def definir_cromatico_por_vertice(self, grafo, coloracao_minima):
         cores_por_vertice = [0 for _ in range(grafo.qtdVertices())]
-        conjuntos_independentes_maximais = self.conjuntos_independentes_maximais(grafo)
-        coloridos = []
-        for conjunto in conjuntos_independentes_maximais:
-            todos_coloridos = True
-            for elemento in conjunto:
-                if elemento not in coloridos:
-                    todos_coloridos = False 
-                    break
-            if not todos_coloridos:
-                for elemento in conjunto:
-                    if not cores_por_vertice[elemento - 1]: 
-                        cores_por_vertice[elemento - 1] = coloracao_minima
-                        coloridos.append(elemento)
-                coloracao_minima -= 1
+        nao_coloridos = [i+1 for i in range(grafo.qtdVertices())]
+        while len(nao_coloridos):
+            conjunto_independente_maximal = self.conjuntos_independentes_maximais(nao_coloridos, grafo)[0]
+            for elemento in conjunto_independente_maximal:
+                cores_por_vertice[elemento - 1] = coloracao_minima
+                nao_coloridos.remove(elemento)
+            coloracao_minima -= 1
         return cores_por_vertice
 
 
