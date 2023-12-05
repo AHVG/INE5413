@@ -20,12 +20,11 @@ def main():
         resultado = EdmondsKarp().busca(grafo, 1, grafo.qtdVertices(), grafo_residual)
         if resultado is None:
             break
+        minimo = float('inf')
         for u in range(len(resultado)-1):
             vertice_u = resultado[u]
             vertice_v = resultado[u + 1]
-            minimo = grafo.sem_aresta
-            if grafo_residual.peso(vertice_u, vertice_v) < minimo:
-                minimo = grafo_residual.peso(vertice_u, vertice_v)
+            minimo = min(minimo, grafo_residual.peso(vertice_u, vertice_v))
                 
         fluxo += minimo
         for u in range(len(resultado)-1):
