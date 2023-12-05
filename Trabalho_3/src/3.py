@@ -12,7 +12,7 @@ def main():
     args = parser.parse_args()
 
     # Cria o grafo a partir do arquivo passado por parâmetro
-    grafo = Grafo(eh_dirigido=False, eh_ponderado=False)
+    grafo = Grafo(eh_ponderado=False)
     grafo.ler(args.file)
 
     resultado = Coloracao().lawler(grafo)
