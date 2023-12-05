@@ -18,11 +18,7 @@ class Coloracao:
                         matriz_adjacencia[v][u] = 1
             G_linha = Grafo(eh_dirigido=False, eh_ponderado=False, matriz=matriz_adjacencia)
             for I in self.conjuntos_independentes_maximais([i+1 for i in range(G_linha.qtdVertices())], G_linha):
-                s_i = list(S)
-                for j in range(len(s_i)):
-                    s_i[j] = S.index(s_i[j]) + 1                
-                for I_ in I: s_i.remove(I_)
-                i = f[str(s_i)]
+                i = f[str(sorted(list(set(S) - set([S[j-1] for j in I]))))]
                 if X[i] + 1 < X[s]:
                     X[s] = X[i] + 1
         return X[-1]
