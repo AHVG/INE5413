@@ -16,7 +16,7 @@ def main():
     grafo.ler(args.file)
 
     coloracao_minima = Coloracao().lawler(grafo)
-    cromaticos_por_vertice = Coloracao().definir_cromatico_por_vertice(grafo, 15)
+    cromaticos_por_vertice = Coloracao().definir_cromatico_por_vertice(grafo, coloracao_minima)
     print(f"Coloração mínima : {coloracao_minima}")
     for i,cor in enumerate(cromaticos_por_vertice): print(f"Vértice {i+1} -> cor {cor}")
 
