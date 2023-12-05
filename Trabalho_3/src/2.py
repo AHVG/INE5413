@@ -16,7 +16,14 @@ def main():
     grafo = Grafo(eh_dirigido=False, eh_ponderado=False)
     grafo.ler_bipartido(args.file)
 
-    print(HopcroftKarp().emparelhar(grafo))
+    m, mate = HopcroftKarp().emparelhar(grafo)
+    result = []
+    for k in mate.keys():
+        aresta = (k, mate[k])
+        if (k, mate[k]) not in result and (mate[k], k) not in result:
+            result.append(aresta)
+    print("Emparelhamento máximo:", m)
+    print("Arestas:", ", ".join([str(aresta) for aresta in result]))
 
 
 if __name__ == "__main__":
