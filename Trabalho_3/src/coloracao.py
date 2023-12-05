@@ -16,14 +16,9 @@ class Coloracao:
                     if grafo.haAresta(S[u], S[v]): 
                         matriz_adjacencia[u][v] = 1
                         matriz_adjacencia[v][u] = 1
-
             G_linha = Grafo(eh_dirigido=False, eh_ponderado=False, matriz=matriz_adjacencia)
             for I in self.conjuntos_independentes_maximais([i+1 for i in range(G_linha.qtdVertices())], G_linha):
-                s_i = list(S)[:]
-                for j in range(len(s_i)):
-                    s_i[j] = S.index(s_i[j]) + 1                
-                for I_ in I: s_i.remove(I_)
-                i = f[str(s_i)]
+                i = f[str(sorted(list(set(S) - set([S[j-1] for j in I]))))]
                 if X[i] + 1 < X[s]:
                     X[s] = X[i] + 1
         return X[-1]
@@ -47,17 +42,27 @@ class Coloracao:
                 R.append(x)
         return R
     
-    def definir_cromatico_por_vertice(self, grafo):
-        cores_por_vertice = [0 for _ in range(grafo.qtdVertices())]
-        nao_coloridos = [i+1 for i in range(grafo.qtdVertices())]
-        cor = 1
-        while len(nao_coloridos):
-            conjunto_independente_maximal = self.conjuntos_independentes_maximais(nao_coloridos, grafo)[0]
-            for elemento in conjunto_independente_maximal:
-                cores_por_vertice[elemento - 1] = cor
-                nao_coloridos.remove(elemento)
-            cor += 1
-        return cores_por_vertice
+    def definir_cromatico_por_vertice(self, grafo, coloracao_minima):
+        possibilidades = [list(range(1, coloracao_minima+1)) for i in range(grafo.qtdVertices())]
+        solucao = [0 for _ in range(grafo.qtdVertices())]
+        for possibilidade in possibilidades[0]:
+            solucao[0] = possibilidade
+            if self.pinta(grafo, possibilidades, solucao, 1): break
+        return solucao
+
+    def pinta(self, grafo, possibilidades, solucao, pintados):
+        if pintados == grafo.qtdVertices(): return True
+        for possibilidade in possibilidades[pintados]: 
+            cor_permitida = True
+            for vizinho in grafo.vizinhos(pintados+1):
+                if solucao[vizinho-1] == possibilidade:
+                    cor_permitida = False
+                    break
+            if cor_permitida:
+                solucao[pintados] = possibilidade
+                if self.pinta(grafo, possibilidades, solucao, pintados+1): return True
+                solucao[pintados] = 0
+
 
 
     def conjunto_potencia(self, s):
