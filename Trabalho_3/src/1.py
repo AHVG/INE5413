@@ -16,8 +16,15 @@ def main():
     grafo.ler(args.file)
     grafo_residual = grafo.obterGrafoResidual()
     fluxo = 0
+    rotulos = grafo.obterRotulos()
+    for i in range(len(rotulos)):
+        if rotulos[i] == 's':
+            vertice_inicial = i+1
+        elif rotulos[i] == 't':
+            vertice_final = i+1
+
     while True:
-        resultado = EdmondsKarp().busca(grafo, 1, grafo.qtdVertices(), grafo_residual)
+        resultado = EdmondsKarp().busca(grafo, vertice_inicial, vertice_final, grafo_residual)
         if resultado is None:
             break
         minimo = float('inf')
