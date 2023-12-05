@@ -25,7 +25,6 @@ class Coloracao:
                 i = f[str(s_i)]
                 if X[i] + 1 < X[s]:
                     X[s] = X[i] + 1
-        print(X)
         return X[-1]
             
 
